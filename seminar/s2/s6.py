@@ -41,5 +41,5 @@ best_model = grid_search.best_estimator_
 y_pred = best_model.predict(X_test)
 
 # Calculate accuracy on the test set
-test_accuracy = accuracy_score(y_test, y_pred)
+test_accuracy = (y_test == y_pred).mean()
 print(f"Test set accuracy: {test_accuracy:.4f}")

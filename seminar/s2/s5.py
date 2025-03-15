@@ -41,7 +41,7 @@ model.fit(X_train_tfidf, y_train)
 # 5. Make predictions on the test set
 y_pred = model.predict(X_test_tfidf)
 # 6. Evaluate performance
-accuracy = accuracy_score(y_test, y_pred)
+accuracy = (y_test == y_pred).mean()
 report = classification_report(y_test, y_pred)
 
 # Print results
