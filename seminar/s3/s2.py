@@ -14,29 +14,29 @@ np.random.seed(42)
 num_samples = 30  # Number of data points
 
 # Single feature for clarity (e.g., 'sqft' or just X)
-X = np.linspace(0, 10, num_samples).reshape(-1, 1)  # Ensuring X is of shape (30, 1)
+X = np.linspace(0, 10, num_samples).reshape(-1, 1)
 
 # True relationship: y = 2 * X^2 - 3 * X + noise
 y_true = 2 * (X**2) - 3 * X  # Non-linear relationship
-noise = np.random.normal(0, 3, size=num_samples)  # Adding noise
-y = y_true.flatten() + noise  # Ensure y is of the same length as X
+noise = np.random.normal(0, 3, size=num_samples)
+y = y_true.flatten() + noise
 
 # Ensure that X and y have the same length
-print("Length of X:", len(X))  # Should be 30
-print("Length of y:", len(y))  # Should be 30
+print("Length of X:", len(X))
+print("Length of y:", len(y))
 
 # Convert to DataFrame
 df = pd.DataFrame({"Feature": X.flatten(), "Target": y})
 
 # 2. Separate features and target
-X = df[["Feature"]].values  # Convert to NumPy array for PolynomialFeatures
-y = df["Target"].values  # Convert to NumPy array
+X = df[["Feature"]].values
+y = df["Target"].values
 
 # 3. Split into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # 4. Transform features to polynomial (degree=2 for illustration)
-poly = PolynomialFeatures(degree=2)  # You can also try degree=3 for higher non-linearity
+poly = PolynomialFeatures(degree=2)
 X_train_poly = poly.fit_transform(X_train)
 X_test_poly = poly.transform(X_test)
 
@@ -52,7 +52,6 @@ r2 = r2_score(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 mae = mean_absolute_error(y_test, y_pred)
 
-# Display evaluation metrics
 print("\nModel Evaluation:")
 print(f"R-squared: {r2:.2f}")
 print(f"Mean Squared Error (MSE): {mse:.2f}")
